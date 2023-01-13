@@ -1,14 +1,23 @@
-const player: readonly [string, number, boolean] = ["jason", 23, true];
-// readonly: 변경할 수 없고 읽는 것만 가능
-// tuple: 정해진 개수와 순서에 따라 배열 선언
+let a: unknown;
 
-const apple: string[] = ["asdf", "sdf"];
-const banana: number[] = [1, 2, 3, 4, 5];
+if (typeof a === "number") {
+  let b = a + 1;
+} else if (typeof a === "string") {
+  let b = a.toUpperCase();
+}
 
-let a: undefined = undefined;
-let b: null = null;
+// void: 아무것도 return하지 않는 함수에서 반환 자료형
+function voidFunction() {
+  console.log("hello");
+}
+const b = voidFunction();
 
-// any: 아무 타입이나 가능
-let c: any = [1, false, "string"];
-let d: any = true;
-c + d;
+function hello(name: string | number) {
+  if (typeof name === "string") {
+    name;
+  } else if (typeof name === "number") {
+    name;
+  } else {
+    name; // type: never
+  }
+}
