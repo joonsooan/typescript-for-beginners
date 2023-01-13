@@ -1,21 +1,14 @@
-let a: number = 123;
-let b: string = "hello";
-let c: string[] = ["a", "b", "c", "d"];
+const player: readonly [string, number, boolean] = ["jason", 23, true];
+// readonly: 변경할 수 없고 읽는 것만 가능
+// tuple: 정해진 개수와 순서에 따라 배열 선언
 
-type Player = {
-  name: string;
-  age?: number;
-};
+const apple: string[] = ["asdf", "sdf"];
+const banana: number[] = [1, 2, 3, 4, 5];
 
-const Bryan: Player = {
-  name: "Bryan",
-};
+let a: undefined = undefined;
+let b: null = null;
 
-const Bob: Player = {
-  name: "Bob",
-};
-
-const playerMaker = (name: string): Player => ({ name });
-
-const jason = playerMaker("jason");
-jason.age = 12;
+// any: 아무 타입이나 가능
+let c: any = [1, false, "string"];
+let d: any = true;
+c + d;
