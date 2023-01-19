@@ -1,21 +1,39 @@
-abstract class User {
-  constructor(
-    private firstName: string,
-    protected lastName: string,
-    public nickName: string
-  ) {}
-  abstract getNickName(): void;
-  getFullName() {
-    return `${this.firstName} ${this.lastName}`;
+type Words = {
+  [key: string]: string;
+};
+
+class Dict {
+  private words: Words;
+  constructor() {
+    this.words = {};
+  }
+  add(word: Word) {
+    if (this.words[word.name] === undefined) {
+      this.words[word.name] = word.def;
+    }
+  }
+  del(name: string) {
+    if (name in this.words) {
+      delete this.words[name];
+    }
+  }
+  show() {
+    console.log(this.words);
+  }
+  def(name: string) {
+    return this.words[name];
   }
 }
-// 추상 클래스는 오직 다른 클래스가 상속받을 수 있는 클래스이다.
 
-class Player extends User {
-  getNickName(): void {
-    console.log(this.lastName);
-  }
+class Word {
+  constructor(public name: string, public def: string) {}
 }
-// protected는 선언한 클래스, 상속받은 클래스 내에서만 접근할 수 있다.
 
-const jason = new Player("joonsoo", "an", "Jason");
+const apple = new Word("apple", "delicous fruit");
+const banana = new Word("banana", "monkey's favorite");
+const cherry = new Word("cherry", "cherry picker");
+const dict = new Dict();
+
+dict.add(apple);
+dict.add(banana);
+dict.add(cherry);
