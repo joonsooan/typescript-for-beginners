@@ -1,17 +1,42 @@
-interface User {
-  firstName: string;
-  lastName: string;
-  sayHello(name: string): string;
-  fullName(): string;
+interface SStorage<T> {
+  [key: string]: T;
 }
 
-class Player implements User {
-  constructor(public firstName: string, public lastName: string) {}
-  fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+class LocalStorage<T> {
+  private storage: SStorage<T> = {};
+
+  create(key: string, value: T) {
+    this.storage[key] = value;
   }
 
-  sayHello(name: string): string {
-    return `Hello, ${name}. My name is ${this.fullName()}`;
+  update(key: string, value: T) {
+    if (this.storage[key] !== undefined) {
+      this.storage[key] = value;
+    } else {
+      console.log(`${key}가 존재하지 않아 새로 만듭니다.`);
+      this.storage[key] = value;
+    }
+  }
+
+  read(key: string): T {
+    return this.storage[key];
+  }
+
+  del(key: string) {
+    delete this.storage[key];
+  }
+
+  clear() {
+    this.storage = {};
   }
 }
+
+const strStorage = new LocalStorage<string>();
+
+strStorage.create("apple", "red");
+strStorage.read("apple");
+
+const boolStorage = new LocalStorage<boolean>();
+
+boolStorage.create("old", false);
+boolStorage.read("old");
